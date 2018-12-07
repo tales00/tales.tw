@@ -1,0 +1,68 @@
+@import 'modules/_variables';
+
+html,body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: aquamarine;
+}
+
+p {
+    margin-bottom: 0.7em;
+}
+
+.grid_waterFall {
+    --columns:1;
+    
+    display: grid;
+    
+    .wf-item {
+        border: 2px solid currentColor;
+    }
+    
+    .item-container {
+        padding: 1em;
+        // background-color: floralwhite;
+    }
+
+    img {
+        max-width: 100%;
+    }
+}
+
+#resume {
+    margin: 3em auto;
+    width: 90vw;
+
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+
+    .wf-item {
+        &:nth-child(1) {
+            border: none;
+            .item-container {
+                padding: 0;
+            }
+        }
+    }
+
+    @media (min-width: $size-sm) {
+        --columns:2;
+    }
+    // @media (min-width: $size-md) {
+    //     --columns:2;
+    // }
+    // @media (min-width: $size-lg) {
+    //     --columns:3;
+    // }
+    // @media (min-width: $size-xl) {
+    //     --columns:3;
+    // }
+    @media (min-width: $size-2x) {
+        --columns:3;
+    }
+}
