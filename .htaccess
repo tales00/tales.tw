@@ -33,7 +33,7 @@ Options +ExecCGI +FollowSymLinks
 #------------------------------------------------------------------------------
 RewriteEngine On
 # RewriteRule ^favicon.ico dist/favicon.ico
-# RewriteRule ^assets/(.+) dist/assets/$1
+# RewriteRule ^assets/(.+) app/assets/$1
 # RewriteRule ^(source)\/|(app)\/|(tmp)\/|\.ini$ - [R=404]
 RewriteRule ^(app)\/|(tmp)\/|\.ini$ - [R=404]
 
