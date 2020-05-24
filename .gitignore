@@ -1,0 +1,6 @@
+.vscode/
+node_modules/
+tmp/
+envi.ini
+
+node_modules/

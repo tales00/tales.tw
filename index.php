@@ -1,2 +1,2 @@
 <?php
-require('app/index.php');
+require('_backend/index.php');

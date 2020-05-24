@@ -1,0 +1,98 @@
+@import '_modules/_variables';
+
+// @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Noto+Sans+TC:400,500,700,900|Noto+Sans+JP:400,500,700,900&subset=chinese-traditional,japanese');
+
+$fallback-font-family: "Helvetica Neue", "Helvetica", "Arial", "PMingliu", -apple-system, system-ui, BlinkMacSystemFont, sans-serif;
+$base-font-family: Roboto, "Segoe UI", "Fira Sans", "Droid Sans";
+$cjk-zhtw-font-family: $base-font-family, 'Noto Sans TC', "Microsoft JhengHei";
+$cjk-jp-font-family: $base-font-family, 'Noto Sans JP', "Hiragino Sans", "Hiragino Kaku Gothic Pro", "Yu Gothic", YuGothic, Meiryo;
+
+:lang(en) { font-family: $base-font-family, $fallback-font-family; }
+:lang(ja) { font-family: $cjk-jp-font-family, $fallback-font-family; }
+:lang(zh), :lang(zh-TW) { font-family: $cjk-zhtw-font-family, $fallback-font-family; }
+
+
+// 1.位置屬性(position, top, right, z-index, display, float等)
+// 2.大小(width, height, padding, margin)
+// 3.文字系列(font, line-height, letter-spacing, color- text-align等)
+// 4.背景(background, border等)
+// 5.其他(animation, transition等)
+:root {
+    // 480/ 600/ 900/ 1200/ 1800/ 2400
+    --size-xs: #{$size-xs}; // 400
+    --size-sm: #{$size-sm}; // 600
+    --size-md: #{$size-md}; // 900
+    --size-lg: #{$size-lg}; // 1200
+    --size-xl: #{$size-xl}; // 1800
+    --size-xxl: #{$size-xxl}; // 2400
+
+    --font: #{$base-font-family};
+    --hover-brightness: 1.2;
+
+    --border-radius: .5rem;
+    --box-shadow: .2rem .2rem 1.0rem;
+
+    // primary
+    // 用在按鈕等地方
+    --color-text: hsl(204, 15%, 94%); //hsl(0, 0%, 0%);
+    --color-bg: hsl(200, 18%, 26%); //hsl(0, 0%, 100%);
+    --color: hsl(207, 87%, 50%);
+    --color-accent: hsla(207, 87%, 50%, 0.043);
+
+    // secndary
+    // 用在 disable 的地方
+    --color-text-secondary: hsl(0, 0%, 55%); //hsl(0, 0%, 60%);
+    --color-bg-secondary: hsl(200, 19%, 18%); //hsl(0, 0%, 91%);
+    --color-secondary: hsl(276, 89%, 48%);
+    --color-secondary-accent: hsla(276, 89%, 48%, 0.043);
+
+    // Tertiary
+    // 強調用？
+
+    --color-shadow: hsl(0, 0%, 96%);
+}
+
+html {
+    overflow-x: auto;
+    overflow-y: auto;
+    
+    // scroll-behavior: smooth;
+    font-size: 10px;
+    line-height: 150%;
+    min-height: 100vh;
+    height: 100%;
+
+    &, * { box-sizing: border-box; }
+
+    //[] 16px [480] 17px [600] 18px [900] 20px [1200] 22px [1800] 24px [2400] 26px
+    @media (max-width: $max-xxs) {
+      font-size: 16px; //16px
+    }
+    @media (min-width: $size-xs) {
+        font-size: 18px; //17px
+    }
+    @media (min-width: $min-mobile) {
+        font-size: 20px; //18px
+    }
+    @media (min-width: $min-tablet) {
+        font-size: 22px; //20px
+    }
+    @media (min-width: $min-desktop) {
+        font-size: 24px; //22px
+        letter-spacing: 0.05em;
+    }
+    @media (min-width: $min-wide) {
+        font-size: 26px; //24px
+    }
+    @media (min-width: $min-full) {
+        font-size: 28px; //26px
+        letter-spacing: 0.1em;
+    }
+}
+
+body {
+    height: inherit;
+}
+
+// orientation: landscape
+// orientation: Portrait
