@@ -1,4 +1,4 @@
 module.exports = {
   assetsDir: 'app-assets',
-  outputDir: '../_dist-view'
+  outputDir: '../_frontend-dist'
 }

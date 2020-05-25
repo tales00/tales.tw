@@ -37,8 +37,8 @@ RewriteEngine On
 # RewriteRule ^(shop)\/assets\/(.+) dist_app/$1/assets/$2
 # RewriteRule ^(app)\/|(site)\/|(tmp)\/|\.ini|\.git$ - [R=404]
 RewriteRule ^_backend|tmp\/|\.ini$ - [R=404]
-RewriteRule ^_dist-view\/index.html$ - [R=404]
-RewriteRule ^app-assets\/(.+) _dist-view/app-assets/$1
+RewriteRule ^_frontend-dist\/index.html$ - [R=404]
+RewriteRule ^app-assets\/(.+) _frontend-dist/app-assets/$1
 
 
 RewriteCond %{REQUEST_FILENAME} !-l
