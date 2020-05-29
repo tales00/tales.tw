@@ -32,9 +32,6 @@ export default {
 <style lang="scss" scoped>
 #app {
   height: inherit;
-  font-family: var(--font);
-  color: var(--color-text);
-  background-color: var(--color-bg);
 }
 
 .scaffold, 

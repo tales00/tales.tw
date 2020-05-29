@@ -1,0 +1,26 @@
+@mixin defineColorHSL($name, $hue, $saturation, $lightness, $lightnessMultiplier, $saturationMultiplier){
+  $name: --#{$name};
+  #{$name}-color-h: #{$hue};
+  #{$name}-color-s: #{$saturation};
+  #{$name}-color-l: #{$lightness};
+  
+  #{$name}-calc-light: #{$lightnessMultiplier};
+  #{$name}-calc-dark: #{$saturationMultiplier};
+  
+  #{$name}-light-h: unquote("var(#{$name}-color-h)");
+  #{$name}-light-s: unquote("var(#{$name}-color-s)");
+  #{$name}-light-l: unquote("calc( var(#{$name}-color-l) * var(#{$name}-calc-light) )");
+
+  #{$name}-dark-h: unquote("var(#{$name}-color-h)");
+  #{$name}-dark-s: unquote("var(#{$name}-color-s)");
+  #{$name}-dark-l: unquote("calc( var(#{$name}-color-l) / var(#{$name}-calc-dark) )");
+
+  #{$name}-color: unquote("hsl(var(#{$name}-color-h), var(#{$name}-color-s), var(#{$name}-color-l))");
+  #{$name}-light: unquote("hsl(var(#{$name}-light-h), var(#{$name}-light-s), var(#{$name}-light-l))");
+  #{$name}-dark: unquote("hsl(var(#{$name}-dark-h), var(#{$name}-dark-s), var(#{$name}-dark-l))");
+
+  #{$name}-text-light: unquote("hsl(calc( var(#{$name}-color-h) + 180), var(#{$name}-color-s), 95%)");
+  #{$name}-text-gray: unquote("hsl(var(#{$name}-color-h), 0%, calc(var(#{$name}-color-l) * 1.15))");
+  #{$name}-text-dark: unquote("hsl(calc( var(#{$name}-color-h) + 180), var(#{$name}-color-s), 10%)");
+
+}

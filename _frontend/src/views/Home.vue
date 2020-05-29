@@ -1,9 +1,6 @@
 <template lang="pug">
   .home
-    img(alt="Vue logo" src="../assets/logo.png")
-    section
       button(@click="prompt") open prompt
-      //- button(@click="slideUpOption") slide up option
 </template>
 
 <script>
@@ -73,3 +70,7 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+
+</style>
