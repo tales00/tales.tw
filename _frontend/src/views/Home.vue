@@ -1,6 +1,8 @@
 <template lang="pug">
   .home
-      button(@click="prompt") open prompt
+    section( v-for=" idx in 6 " :style="{background: `var(--gray-${idx-1})`}")
+      | gray-{{ idx-1 }}
+    button(@click="prompt") open prompt
 </template>
 
 <script>

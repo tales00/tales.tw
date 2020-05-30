@@ -1,7 +1,7 @@
 @import '_modules/_colorFunc';
 @import '_modules/_variables';
 
-// @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Noto+Sans+TC:400,500,700,900|Noto+Sans+JP:400,500,700,900&subset=chinese-traditional,japanese');
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Noto+Sans+TC:400,500,700,900|Noto+Sans+JP:400,500,700,900&subset=chinese-traditional,japanese');
 
 $fallback-font-family: "Helvetica Neue", "Helvetica", "Arial", "PMingliu", -apple-system, system-ui, BlinkMacSystemFont, sans-serif;
 $base-font-family: Roboto, "Segoe UI", "Fira Sans", "Droid Sans";
@@ -28,32 +28,44 @@ $cjk-jp-font-family: $base-font-family, 'Noto Sans JP', "Hiragino Sans", "Hiragi
     --size-xxl: #{$size-xxl}; // 2400
 
     --base-font-family: #{$base-font-family};
-    --hover-brightness: 1.2;
     
     --border-radius: .5rem;
     --box-shadow: .2rem .2rem 1.0rem;
     
-    // Tertiary
-    // 強調用？
-    
+    --hover-brightness: 1.2;
     --color-shadow: hsl(0, 0%, 96%);
     
     font-family: var(--base-font-family);
+
+    // gray
+    @include definColorlightnessLevel;
     
-    // primary
-    @include defineColorHSL(pri, 206, 87%, 67%, 1.27, 1.3);
+    // Primary
+    @include defineColorHSL(primary, 206, 87%, 67%, 1.27, 1.3);
 
     // secndary
-    @include defineColorHSL(sec, 0, 0%, 74%, 1.27, 1.3);
+    @include defineColorHSL(secndary, 0, 0%, 74%, 1.27, 1.3);
 
-    color: var(--pri-text-dark);
-    background-color: var(--pri-color);
+    // Success
+    @include defineColorHSL(success, 134, 61%, 41%);
+
+    // Danger
+    @include defineColorHSL(danger, 354, 70%, 54%);
+
+    // Warning
+    @include defineColorHSL(warning, 45, 100%, 51%);
+    
+    // Info
+    @include defineColorHSL(info, 188, 78%, 41%);
+    
+    color: var(--primary-text-dark);
+    background-color: var(--primary-color);
 }
     
 [data-theme="dark"] {
-    @include defineColorHSL(pri, 200, 18%, 26%, 1.27, 2);
-    color: var(--pri-text-light);
-    background-color: var(--pri-color);
+    @include defineColorHSL(primary, 200, 18%, 26%, 1.27, 2);
+    color: var(--primary-text-light);
+    background-color: var(--primary-color);
 }
 
 html {
