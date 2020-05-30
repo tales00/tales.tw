@@ -1,4 +1,4 @@
-@mixin defineColorHSL($name, $hue, $saturation, $lightness, $lightnessMultiplier, $saturationMultiplier){
+@mixin defineColorHSL($name, $hue, $saturation, $lightness, $lightnessMultiplier: 1.27, $saturationMultiplier: 2){
   $name: --#{$name};
   #{$name}-color-h: #{$hue};
   #{$name}-color-s: #{$saturation};
