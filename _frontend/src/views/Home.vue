@@ -7,6 +7,7 @@
 
 <script>
 // @ is an alias to /src
+import { talesAPI } from '@/api'
 
 export default {
   name: 'home',
@@ -68,7 +69,8 @@ export default {
       } )
     }
   },
-  created() {
+  async created() {
+    console.log( await talesAPI.getPixivUser(743865) )
   },
 }
 </script>
