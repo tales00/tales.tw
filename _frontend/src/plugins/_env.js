@@ -9,28 +9,32 @@ const browser_pattern = {
   puffin: /\bPuffin/i,
   miui: /\bMiuiBrowser\//i,
   instagram: /\bInstagram/i,
+  chrome: /Chrome\/[.0-9]*( Mobile)?/,
   kinza: /Kinza/,
-  chrome: /\bCrMo\b|CriOS|Android.*Chrome\/[.0-9]* (Mobile)?/,
   safari: /Version.*Mobile.*Safari|Safari.*Mobile|MobileSafari/,
   ie: /IEMobile|MSIEMobile/,
-  firefox: /fennec|firefox.*maemo|(Mobile|Tablet).*Firefox|Firefox.*Mobile|FxiOS|Gecko\/20100101\sFirefox\/\d{2}(:?\.\d)?/,
+  firefox: /fennec|firefox.*maemo|(Mobile|Tablet).*Firefox|Firefox.*Mobile|FxiOS/,
   edge: /Edge/,
   edgeMobile: /EdgA/,
 };
+
+const IAB_rules = ['WebView', '(iPhone|iPod|iPad)(?!.*Safari\/)', 'Android.*(wv|\.0\.0\.0)'].join('|');
+const IAB_apps = ['messenger','facebook','twitter','line','wechat','instagram'];
+
 const _env = {
   install: function(Vue) {
     Vue.prototype.$env = {
-      ua: navigator.userAgent,
-      isStandalone: window.matchMedia('(display-mode: standalone)').matches,
-      
-      IAB_rules: ['WebView', '(iPhone|iPod|iPad)(?!.*Safari\/)', 'Android.*(wv|\.0\.0\.0)'].join('|'),
-      IAB_apps: ['messenger','facebook','twitter','line','wechat','instagram'],
-  
+      ua: navigator.userAgent,      
       get browser() { return Object.keys(browser_pattern).filter(brsName=>this.ua.match(browser_pattern[brsName])).join(',') || 'undetected' ; },
+      get isStandalone() { return (window.matchMedia('(display-mode: standalone)').matches) || (window.navigator.standalone) || document.referrer.includes('android-app://'); },
+      get isTouchAble() { return ( 'ontouchstart' in window ) || ( (navigator.maxTouchPoints||navigator.msMaxTouchPoints) > 0 ); },
+      get isIOS() { return /(iPad|iPhone)/i.test(this.ua) || false ; },
+      get isAndroid() { return /android/i.test(this.ua) || false ; },
       get isMobile() { return /(iPad|iPhone|Android|Mobile)/i.test(this.ua) || false ; },
       get isDesktop() { return !this.isMobile; },
-      get isWV() { return new RegExp(`(${this.IAB_rules})`, 'ig').test(this.ua) || false },
-      get isIAB() { return new RegExp(`(${this.IAB_apps.join('|')})`).test(this.browser); },
+      get isWV() { return new RegExp(`(${IAB_rules})`, 'ig').test(this.ua) || false },
+      get isIAB() { return new RegExp(`(${IAB_apps.join('|')})`).test(this.browser); },
+      get isHybrid() { return !this.isStandalone && (this.isWV || this.IAB); },
       get isOnline() { return navigator.onLine; },
   
       whenOnline(fn, options={passive:true}) { window.addEventListener('online', fn, options); },
