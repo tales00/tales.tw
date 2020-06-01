@@ -98,20 +98,20 @@ export default {
       const {offsetWidth, scrollWidth, scrollLeft} = this.$refs['slideHolder'];
       return Math.floor( Math.round( scrollLeft / offsetWidth) % ( scrollWidth / offsetWidth ) ) + 1;
     },
-    slideTo(idx) {  
-      if( Number.isInteger(idx) ) {
-        const holder = this.$refs['slideHolder'];
-        holder.scrollTo({
-          left: (idx - 1) * holder.offsetWidth,
-          behavior: 'smooth'
-        });
-      }
-    },
-    slideTo(idx) {
-      if( !(this.isTouchAble && this.slide.isTouching) && !this.slide.isScrolling ) {
-        this.$emit('update:idx', idx);
-      }
-    },
+    // slideTo(idx) {  
+    //   if( Number.isInteger(idx) ) {
+    //     const holder = this.$refs['slideHolder'];
+    //     holder.scrollTo({
+    //       left: (idx - 1) * holder.offsetWidth,
+    //       behavior: 'smooth'
+    //     });
+    //   }
+    // },
+    // slideTo(idx) {
+    //   if( !(this.isTouchAble && this.slide.isTouching) && !this.slide.isScrolling ) {
+    //     this.$emit('update:idx', idx);
+    //   }
+    // },
     slideBy(offset) {
       if( typeof offset === 'number') {
         this.slideTo( this.idx + Math.round(offset) );
@@ -119,7 +119,7 @@ export default {
     },
     updateSlideTotal() {
       const {slideHolder=false} = this.$refs;
-      this.$set(this.$data, 'slideTotal', holder.querySelectorAll('.slide').length || 0);
+      this.$set(this.$data, 'slideTotal', slideHolder.querySelectorAll('.slide').length || 0);
     },
     updateUI() {
       const { offsetWidth, scrollWidth } = this.$refs['slideHolder'];
