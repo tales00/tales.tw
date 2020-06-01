@@ -1,28 +1,18 @@
 <template lang="pug">
-  #app(:data-browser="env.browser")
+  .pageRoot
     .scaffold
-      .main-frame(v-if="is_suportted_env")
+      slot(name="intro")
+      .content
         main
           slot
         header(ref="header") header
         footer(ref="header") footer
-      .main-frame.unsuportted(v-else)
-        | NOT SUPROTTED_ENV
-    //- Overlay-Container(ref="app-modal")
 </template>
 
 <script>
 export default {
   name: 'scaffold',
-  props: {
-    env: Object
-  },
-  computed: {
-    is_suportted_env() {
-      return !['ie'].includes(this.$env.browser);
-      // return false;
-    },
-  },
+  computed: {},
   methods: {},
   created() {},
   mounted() {}
@@ -30,12 +20,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#app {
+.pageRoot {
   height: inherit;
 }
-
 .scaffold, 
-.main-frame
+.content
 {
   height: inherit;
 }
@@ -43,9 +32,9 @@ export default {
 .scaffold {
   margin: auto;
   max-width: var(--size-xl);
-  background-color: hsla(0, 0%, 100%, 0.1);
+  // background-color: hsla(0, 0%, 100%, 0.1);
 }
-.main-frame {
+.content {
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-template-areas: 
