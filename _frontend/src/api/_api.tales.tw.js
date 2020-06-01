@@ -1,13 +1,27 @@
 const api_base = 'https://api.tales.tw';
 
-const getPixivUser = userID => fetch(`${api_base}/fetch/v1/pixiv-user/${userID}`,{
+// 取得 pixiv 使用者資料
+const getPixivUserData = userID => fetch(`${api_base}/fetch/v1/pixiv-user/${userID}`,{
   method: 'post',
-  // headers: {},
-  // body: {},
+}).then( res => res.json() )
+.then( ({ illusts, mangas, profile, update }) => ({ 
+	illusts: Object.values(illusts).reverse(), 
+	mangas: Object.values(mangas).reverse(), 
+	profile, update
+}) );
+
+const getPlurkPost = userName => fetch(`${api_base}/fetch/v1/plurk/${userName}/profile`,{
+  method: 'post',
+}).then( res => res.json() );
+
+const getPlurkProfile = userName => fetch(`${api_base}/fetch/v1/plurk/${userName}/profile`,{
+  method: 'post',
 }).then( res => res.json() );
 
 export default {
-  getPixivUser
+  getPixivUserData,
+	getPlurkPost,
+	getPlurkProfile,
 }
 
 /* 
