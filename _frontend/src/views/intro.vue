@@ -84,11 +84,11 @@ nav {
   display: grid;
   padding: 1rem;
   grid-auto-flow: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   .entry {
     width: calc( ((100vmin - 3rem) - 2rem) / 7 );
-    max-width: 2.5rem;
+    max-width: 2rem;
     img {
       display: block;
       margin: auto;
@@ -119,6 +119,7 @@ nav {
   .advocate {
     grid-column: 3;
     text-align: left;
+    padding-right: 1.5rem;
     h3 {
       font-size: calc( var(--intro-width) / 28);
       margin: 3vmin auto;
@@ -137,7 +138,7 @@ nav {
     img{
       position: absolute;
       top: 50%;
-      left: calc(var(--intro-width) / 3);
+      // left: calc(var(--intro-width) / 3);
       width: calc(var(--intro-height) / 3);
       height: calc(var(--intro-height) / 3);
 
@@ -148,7 +149,7 @@ nav {
   nav {
     padding: 1rem;
     padding-left: 0;
-    align-self: end;
+    align-self: flex-end;
     .entry {
       width: calc( ((var(--intro-width) / 3 * 2 ) - 2rem) / 7 );
     }
@@ -168,6 +169,14 @@ nav {
     --intro-height: calc(var(--size-md) - 3rem);
   }
 }
+@media (min-width: $size-sm) {
+ nav {
+    justify-content: flex-end;
+    .entry {
+      margin: auto 0.6rem;
+    }
+  }
+}
 @media (min-width: $size-md) {
   .intro {
     --intro-width: calc(var(--size-md) - 3rem);
@@ -175,15 +184,13 @@ nav {
   }
   .avatar {
     img{
-
       left: unset;
     }
   }
   nav {
-    justify-content: flex-end;
-    .entry {
-      margin: 0 1rem;
-    }
+    padding: 1rem 1.5rem;
+    padding-left: 4rem;
+    align-self: flex-end;
   }
 }
 </style>
