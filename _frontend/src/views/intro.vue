@@ -20,7 +20,7 @@
         img(src="@/assets/img/images.svg")
       .entry
         img(src="@/assets/img/envelope.svg")
-      .entry(@click="prompt")
+      .entry(@click="$emit('showQRcode')")
         img(src="@/assets/img/qrcode.svg")
 </template>
 
