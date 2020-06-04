@@ -1,6 +1,9 @@
 <template lang="pug">
   App-scaffold
-    intro( slot="intro" @showQRcode="showQRcode")
+    intro( slot="intro" 
+      @showQRcode="showQRcode"
+      @showContact="showContact"
+    )
     router-view
 </template>
 
@@ -8,6 +11,7 @@
 import { AppScaffold } from '@/scaffold'
 import intro from '@/views/intro'
 import qrcode from '@/views/modal/qrcode'
+import contact from '@/views/modal/contact'
 
 export default {
   name: 'app',
@@ -18,12 +22,16 @@ export default {
   data() { return { }},
   computed: {},
   methods: {
+    showContact() {
+      this.$dialog.show( {
+        component: contact,
+      } );
+    },
     showQRcode() {
       this.$dialog.show( {
         component: qrcode,
-        // paramObj: {}
       } );
-    }
+    },
   },
   created() {
   },

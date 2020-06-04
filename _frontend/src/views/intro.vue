@@ -18,7 +18,7 @@
         img(src="@/assets/img/comment-alt-lines.svg")
       .entry
         img(src="@/assets/img/images.svg")
-      .entry
+      .entry(@click="$emit('showContact')")
         img(src="@/assets/img/envelope.svg")
       .entry(@click="$emit('showQRcode')")
         img(src="@/assets/img/qrcode.svg")
