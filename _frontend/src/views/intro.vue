@@ -20,13 +20,13 @@
         img(src="@/assets/img/images.svg")
       .entry
         img(src="@/assets/img/envelope.svg")
-      .entry
+      .entry(@click="prompt")
         img(src="@/assets/img/qrcode.svg")
 </template>
 
 <script>
 export default {
-  
+  name: 'intro',
 }
 </script>
 
@@ -50,22 +50,22 @@ export default {
     height: 100%;
     width: 100%;
     object-fit: cover;
-    object-position: top right;
+    object-position: top left;
   }
 }
 
 .advocate {
   color: var(--gray-5);
   text-align: center;
-  font-weight: bolder;
   letter-spacing: 0.1rem;
   transform: scaleY(0.8) skewX(-16deg);
   h3 {
-    font-style: italic;
-    font-size: calc( var(--intro-width) / 18);
+    font-weight: bolder;
+    // font-style: italic;
+    font-size: calc( var(--intro-width) / 25);
   }
   h1 {
-    font-size: calc( var(--intro-width) / 16);
+    font-size: calc( var(--intro-width) / 20);
   }
 }
 
@@ -138,7 +138,6 @@ nav {
     img{
       position: absolute;
       top: 50%;
-      // left: calc(var(--intro-width) / 3);
       width: calc(var(--intro-height) / 3);
       height: calc(var(--intro-height) / 3);
 
@@ -156,9 +155,6 @@ nav {
   }
 }
 @media (min-height: $size-sm) {
-  .intro {
-    --intro-height: calc(var(--size-sm) - 3rem);
-  }
   .advocate {
     h3 { margin-top: 1rem; margin-bottom: 0;}
     h1 { margin-top: 1.5rem; margin-bottom: 0;}
@@ -172,20 +168,13 @@ nav {
 @media (min-width: $size-sm) {
  nav {
     justify-content: flex-end;
-    .entry {
-      margin: auto 0.6rem;
-    }
+    grid-gap: 0.6rem;
   }
 }
 @media (min-width: $size-md) {
   .intro {
     --intro-width: calc(var(--size-md) - 3rem);
-    grid-template-columns: 1fr 1rem auto;
-  }
-  .avatar {
-    img{
-      left: unset;
-    }
+    grid-template-columns: 0.6fr 1rem auto;
   }
   nav {
     padding: 1rem 1.5rem;
