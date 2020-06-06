@@ -5,8 +5,10 @@
       .content
         main
           slot
-        header(ref="header") header
-        footer(ref="header") footer
+        header(ref="header")
+          slot(name="header") header
+        footer(ref="footer")
+          slot(name="footer") footer
 </template>
 
 <script>
