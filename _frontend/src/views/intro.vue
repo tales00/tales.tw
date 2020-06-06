@@ -12,11 +12,11 @@
       img(src="@/assets/img/avatar_tales_color.jpg")
     // -
     nav
-      .entry
+      router-link.entry(:to="{name:'about'}")
         img(src="@/assets/img/user-circle.svg")
-      .entry
+      router-link.entry(:to="{name:'blog'}")
         img(src="@/assets/img/comment-alt-lines.svg")
-      .entry
+      router-link.entry(:to="{name:'illust'}")
         img(src="@/assets/img/images.svg")
       .entry(@click="$emit('showContact')")
         img(src="@/assets/img/envelope.svg")
