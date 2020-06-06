@@ -174,7 +174,7 @@ nav {
 @media (min-width: $size-md) {
   .intro {
     --intro-width: calc(var(--size-md) - 3rem);
-    grid-template-columns: 0.6fr 1rem auto;
+    grid-template-columns: 0.8fr 1rem auto;
   }
   nav {
     padding: 1rem 1.5rem;
