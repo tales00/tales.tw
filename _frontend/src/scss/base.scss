@@ -27,6 +27,8 @@ $cjk-jp-font-family: $base-font-family, 'Noto Sans JP', "Hiragino Sans", "Hiragi
     --size-xl: #{$size-xl}; // 1800
     --size-xxl: #{$size-xxl}; // 2400
 
+    --app-max-width: var(--size-xl);
+
     --base-font-family: #{$base-font-family};
     
     --border-radius: .5rem;

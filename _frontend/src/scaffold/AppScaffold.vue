@@ -33,8 +33,7 @@ export default {
 
 .scaffold {
   margin: auto;
-  max-width: var(--size-xl);
-  // background-color: hsla(0, 0%, 100%, 0.1);
+  max-width: var(--app-max-width);
 }
 .content {
   display: grid;
