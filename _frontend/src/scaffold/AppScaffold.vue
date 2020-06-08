@@ -14,8 +14,29 @@
 <script>
 export default {
   name: 'scaffold',
+  // props: {
+  //   autoSkipIntro: {
+  //     type: Boolean,
+  //     default: false
+  //   }
+  // },
   computed: {},
-  methods: {},
+  watch: {
+    '$route': {
+      handler() {
+        this.scrollViewTop();
+      }
+    }
+  },
+  methods: {
+    scrollViewTop() {
+      if( !this.$route.meta.isIntro ) {
+        this.$refs['header'].scrollIntoView({behavior: 'smooth'});
+      } else {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      }
+    }
+  },
   created() {},
   mounted() {}
 }
