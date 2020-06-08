@@ -11,21 +11,34 @@ export default new Router({
     {
       path: '/',
       name: 'main',
-      component: () => import('@/views/about.vue')
+      meta: {
+        isIntro: true,
+        sectionName: '',
+      },
+      component: () => import('@/views/profile.vue')
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('@/views/about.vue')
+      path: '/profile',
+      name: 'profile',
+      meta: {
+        sectionName: 'profile',
+      },
+      component: () => import('@/views/profile.vue')
     },
     {
       path: '/blog',
       name: 'blog',
+      meta: {
+        sectionName: 'blog',
+      },
       component: () => import('@/views/blog.vue')
     },
     {
       path: '/illust',
       name: 'illust',
+      meta: {
+        sectionName: 'illust',
+      },
       component: () => import('@/views/illust.vue')
     },
     // default

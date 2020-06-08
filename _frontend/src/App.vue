@@ -5,7 +5,11 @@
       @showQRcode="showQRcode"
       @showContact="showContact"
     )
-    header-nav(slot="header")
+    header-nav(
+      slot="header"
+      @showQRcode="showQRcode"
+      @showContact="showContact"
+    )
     router-view
 </template>
 

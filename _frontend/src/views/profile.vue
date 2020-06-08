@@ -1,5 +1,5 @@
 <template lang="pug">
-  .about about
+  .profile about
 </template>
 
 <script>
