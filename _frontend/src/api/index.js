@@ -1,4 +1,4 @@
-import talesAPI from './_api.tales.tw'
+import * as talesAPI from './_api.tales.tw'
 
 export {
   talesAPI

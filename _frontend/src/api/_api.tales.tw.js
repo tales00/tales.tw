@@ -34,7 +34,7 @@ const getPlurkResponse = postID => fetch(
 .then( res => res.json() );
 
 
-export default {
+export {
   getPixivUserData,
 	getPlurkPost,
 	getPlurkProfile,
