@@ -56,9 +56,13 @@ export default {
   // --row-gap: 1rem;
   // @media (min-width: $size-xs) { --col-count: 2; }
   @media (min-width: $size-sm) { --col-count: 3; }
-  @media (min-width: $size-md) { --col-count: 4; }
-  @media (min-width: $size-lg) { --col-count: 5; }
+  // @media (min-width: $size-md) { --col-count: 4; }
+  @media (min-width: $size-lg) { --col-count: 4; }
   // @media (min-width: $size-xl) { --col-count: 6; }
   // @media (min-width: $size-xxl) { --col-count: 7; }
+
+  .masonryItem {
+    img { width: 100%; }
+  }
 }
 </style>

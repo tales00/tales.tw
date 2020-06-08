@@ -11,7 +11,7 @@ function debounce(fn) {
     frame = requestAnimationFrame( ()=>{ fn(...params); } )
   }
 }
-const createMasonryBlock = ({$el, $spanBasis = 8}) => {
+const createMasonryBlock = ({$el, $spanBasis = 16}) => {
   console.log('createMasonryBlock');
   
   let lastWidth = 0; 
@@ -39,8 +39,9 @@ const createMasonryBlock = ({$el, $spanBasis = 8}) => {
           items_in_this_column.forEach(item=>{
             const row_span = Math.ceil( item.offsetHeight / $spanBasis );
   
-            item.style.gridColumn = col_idx;
-            item.style.gridRowStart = row_start;
+            // 若不設定 gridColumn 跟 gridRowStart 則可以緊密排列
+            // item.style.gridColumn = col_idx;
+            // item.style.gridRowStart = row_start;
             item.style.gridRowEnd = 'span ' + row_span;
   
             row_start = row_start + row_span;
