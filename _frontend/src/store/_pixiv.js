@@ -3,9 +3,9 @@ import { getPixivUserData } from '@/api/_api.tales.tw'
 export default {
   namespaced: true,
   state: {
-    illusts: undefined,
-    mangas: undefined,
-    profile: undefined,
+    illusts: [],
+    mangas: [],
+    profile: {},
     update: undefined,
    },
   getters: {
