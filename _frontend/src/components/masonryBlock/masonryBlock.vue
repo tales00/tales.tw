@@ -1,5 +1,5 @@
 <template lang="pug">
-  .masonryBlock
+  section.masonryBlock
     slot
 </template>
 
