@@ -5,38 +5,18 @@
       .content
         main
           slot
-        header(ref="header")
+        header
           slot(name="header") header
-        footer(ref="footer")
+        footer
           slot(name="footer") footer
 </template>
 
 <script>
 export default {
   name: 'scaffold',
-  // props: {
-  //   autoSkipIntro: {
-  //     type: Boolean,
-  //     default: false
-  //   }
-  // },
   computed: {},
-  watch: {
-    '$route': {
-      handler() {
-        this.scrollViewTop();
-      }
-    }
-  },
-  methods: {
-    scrollViewTop() {
-      if( !this.$route.meta.isIntro ) {
-        this.$refs['header'].scrollIntoView({behavior: 'smooth'});
-      } else {
-        window.scrollTo({top: 0, behavior: 'smooth'});
-      }
-    }
-  },
+  watch: { },
+  methods: { },
   created() {},
   mounted() {}
 }

@@ -13,7 +13,7 @@
           | {{ illust.title }}
       .author
         a.avatar(:href="user.URL" target="_blank")
-          img(:src="user.image" referrerpolicy="no-referrer")
+          img(:src="user.imageBig" referrerpolicy="no-referrer")
           span.authorName by {{ user.name }}
       .tags
         a.tag(
@@ -43,13 +43,12 @@ export default {
     fetchPixivIllust( illustId, userId ) {
       getPixivIllustData( illustId ).then( ({illust, user}) => {
         if( userId && userId !== user.userId ) {
-          this.$emit('onUserError');
+          this.$emit('userError');
+        } else {
+          this.illust = illust;
+          this.user = user;
+          this.isIllustLoaded = true;
         }
-        this.illust = illust;
-        this.user = user;
-        this.isIllustLoaded = true;
-
-        this.$emit('onIllustLoaded');
       });
 
     }

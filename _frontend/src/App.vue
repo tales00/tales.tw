@@ -7,10 +7,14 @@
     )
     header-nav(
       slot="header"
+      ref="header"
       @showQRcode="showQRcode"
       @showContact="showContact"
     )
-    router-view
+    router-view(
+      @scrollToIntro="scrollToIntro"
+      @scrollToTop="scrollToTop"
+    )
 </template>
 
 <script>
@@ -30,6 +34,14 @@ export default {
   data() { return { }},
   computed: {},
   methods: {
+    scrollToIntro() {
+      console.log('scrollToIntro');      
+      window.scrollTo({behavior: 'smooth'});
+    },
+    scrollToTop() {
+      console.log('scrollToTop');      
+      this.$refs['header'].$el.scrollIntoView({behavior: 'smooth'});
+    },
     showContact() {
       this.$dialog.show( {
         component: contact,

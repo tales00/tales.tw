@@ -2,7 +2,7 @@
   .sect-illust
     masonry-block( v-if="isPixivLoaded" )
       masonry-item( v-for=" (illust, idx) in illusts" )
-        .illustCard(@click="showPixivIllustModal(illust.id)")
+        .illustCard(@click="pushIllustId(illust.id)")
           img.illust(
             :alt="illust.alt"
             :src="`//images.weserv.nl/?we&w=360&url=pixiv.cat/${illust.id}${illust.pageCount>1?'-1':''}.jpg`"
@@ -32,40 +32,89 @@ export default {
       isPixivLoaded: 'isLoaded'
     }),
   },
-  // watch: { },
+  watch: {
+    '$route.name': {
+      handler( name ) {
+        switch ( name ) {
+          case 'illust':
+            this.illustInit();
+            break;
+
+          case 'showPixivIllust':
+            this.showPixivInit();
+            break;
+        
+          default:
+            break;
+        }
+      }
+    }
+  },
   methods: {
     ...mapPixivActions({
       fetchPixivUser: 'fetchUser'
     }),
-
-    showPixivIllustModal(illustId) {
-      
+    illustInit() {
+      if( !this.isPixivLoaded ) {
+        this.fetchPixivUser(743865).then( () => {
+          setTimeout( () => {
+            window.dispatchEvent( new Event('resize') );
+          }, 1000);
+        });
+      }
+    },
+    showPixivInit( isDirectOpen = false ) {
+      this.showPixivIllustModal(this.$route.params.illustId, isDirectOpen );
+    },
+    pushIllustId( illustId ) {
+      this.$router.push({ name: 'showPixivIllust', params: { illustId }});
+    },
+    showPixivIllustModal(illustId, isDirectOpen = false) {
+      const popstateEv = () => {
+        this.$dialog.hide();
+      }
       this.$dialog.show( {
         component: ShowPixivIllust,
         paramObj: {
           dialog: {
+            maxWidth: '90vw',
             props: {
               illustId,
               userId: '743865'
             },
             events: {
-              'onIllustLoaded': () => {
-                console.log('got loaded event');
+              'userError': () => {
+                console.log('user error');
+                window.location.replace(`https://www.pixiv.net/artworks/${illustId}`);
               }
             }
           },
+          hook: {
+            beforeOpen: () => {
+              window.addEventListener('popstate', popstateEv, {once: true});
+            },
+            beforeClose: () => {              
+              if( isDirectOpen ) { this.$router.push({ name: 'illust' }); }
+            },
+            closed: () => {
+              window.removeEventListener('popstate', popstateEv);
+              if( 'showPixivIllust' === this.$route.name ) { this.$router.go(-1); }
+            }
+          }
         }
       } );
     },
   },
   created() {
-    if( 'illust' === this.$route.name && !this.isPixivLoaded ) {
-      console.log('fetch pixiv');
-      this.fetchPixivUser(743865);
+    if( 'illust' === this.$route.name ) {
+      this.illustInit();
     } else {
-      console.log('not fetch pixiv');
+      this.$once('hook:mounted', ()=>{ this.showPixivInit( true ); });
     }
   },
+  mounted() {
+    this.$emit('scrollToTop');
+  }
 }
 </script>
 

@@ -21,6 +21,7 @@ export default new Router({
       path: '/profile',
       name: 'profile',
       meta: {
+        scrollToViewTop: true,
         sectionName: 'profile',
       },
       component: () => import('@/views/profile.vue')
@@ -29,6 +30,7 @@ export default new Router({
       path: '/blog',
       name: 'blog',
       meta: {
+        scrollToViewTop: true,
         sectionName: 'blog',
       },
       component: () => import('@/views/blog.vue')
@@ -36,6 +38,15 @@ export default new Router({
     {
       path: '/illust',
       name: 'illust',
+      meta: {
+        scrollToViewTop: true,
+        sectionName: 'illust',
+      },
+      component: () => import('@/views/illust.vue')
+    },
+    {
+      path: '/illust/pixiv/:illustId',
+      name: 'showPixivIllust',
       meta: {
         sectionName: 'illust',
       },
