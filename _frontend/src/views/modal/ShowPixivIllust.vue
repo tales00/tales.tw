@@ -3,7 +3,7 @@
     picture
       img(
         v-for="idx in illust.pageCount"
-        :src="`//images.weserv.nl/?url=pixiv.cat/${illustId}${illust.pageCount>1?'-'+idx:''}.jpg`"
+        :src="`//images.weserv.nl/?il&url=pixiv.cat/${illustId}${illust.pageCount>1?'-'+idx:''}.jpg`"
         referrerpolicy="no-referrer"
       )
     .illustInfo
@@ -12,9 +12,7 @@
         a(:href="`//www.pixiv.net/artworks/${illustId}`" target="_blank")
           | {{ illust.title }}
       .author
-        a.avatar(:href="user.URL" target="_blank")
-          img(:src="user.imageBig" referrerpolicy="no-referrer")
-          span.authorName by {{ user.name }}
+        a.authorName(:href="user.URL" target="_blank") by {{ user.name }}
       .tags
         a.tag(
           v-for=" (tag, idx) in illust.tags"
@@ -22,6 +20,9 @@
           target="_blank"
         )
           | {{ tag.tag }}
+      .extrnal
+        a.linkToPixiv(:href="`//www.pixiv.net/artworks/${illustId}`" target="_blank")
+          | view on pixiv
 </template>
 
 <script>
@@ -69,7 +70,7 @@ export default {
     overflow-y: auto;
   }
   @media (orientation: landscape) {
-    grid-template-columns: 1fr 30%;
+    grid-template-columns: 1fr minmax(30%, 30vw);
     
     picture {
       max-height: inherit;
@@ -83,6 +84,8 @@ picture {
 .illustInfo {
   padding: 0.5rem;
   background-color: hsla(0, 0%, 100%, 0.7);
+  overflow-y: auto;
+  max-height: inherit;
 
   @media (orientation: Portrait) {
     position: sticky;
@@ -96,13 +99,8 @@ picture {
   font-weight: bold;
 }
 .author {
-  display: flex;
-  flex-flow: row-reverse;
-  margin: 1rem auto;
-}
-.avatar {
-  display: block;
-  img { margin: auto; }
+  margin: 0.5rem auto 1rem;
+  text-align: right;
 }
 .authorName {
   font-size: 0.8rem;
@@ -120,5 +118,18 @@ picture {
   margin-bottom: 0.2rem;
   margin-right: 0.6rem;
   padding: 0.2rem 0.5rem 0.2rem 0.2rem;
+}
+.extrnal {
+  display: flex;
+  justify-content: center;
+  margin: 1rem auto;
+  .linkToPixiv {
+    display: block;
+    color: var(--info-text-light);
+    background-color: var(--info-color);
+    border-radius: 1.5rem;
+    padding: 0.2rem 1rem;
+  }
+
 }
 </style>

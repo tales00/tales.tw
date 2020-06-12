@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  name: 'masonryItem'
+  name: 'masonryItem',
 }
 </script>
 

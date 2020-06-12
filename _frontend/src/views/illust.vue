@@ -1,11 +1,14 @@
 <template lang="pug">
   .sect-illust
-    masonry-block( v-if="isPixivLoaded" )
+    .account-info
+      | {{ profile.description }}
+    masonry-block( v-if="isPixivLoaded" ref="illustsMasonry")
       masonry-item( v-for=" (illust, idx) in illusts" )
         .illustCard(@click="pushIllustId(illust.id)")
           img.illust(
             :alt="illust.alt"
-            :src="`//images.weserv.nl/?we&w=360&url=pixiv.cat/${illust.id}${illust.pageCount>1?'-1':''}.jpg`"
+            :src="`//images.weserv.nl/?we$il&w=360&url=pixiv.cat/${illust.id}${illust.pageCount>1?'-1':''}.jpg`"
+            loading="lazy"
             referrerpolicy="no-referrer"
           )
           time.illustCreateDate {{ illust.createDate.match(/\d{4}-\d{2}-\d{2}/)[0] }}
@@ -28,9 +31,7 @@ export default {
   components: { masonryBlock, masonryItem },
   computed: {
     ...mapPixivState(['illusts', 'mangas', 'profile', 'update',]),
-    ...mapPixivGetters({
-      isPixivLoaded: 'isLoaded'
-    }),
+    ...mapPixivGetters({ isPixivLoaded: 'isLoaded' }),
   },
   watch: {
     '$route.name': {
@@ -58,10 +59,27 @@ export default {
       if( !this.isPixivLoaded ) {
         this.fetchPixivUser(743865).then( () => {
           setTimeout( () => {
-            window.dispatchEvent( new Event('resize') );
+            this.setillustEvent();
           }, 1000);
         });
+      } else {
+        setTimeout( () => {
+          window.dispatchEvent( new Event('resize') );
+        }, 250);
       }
+    },
+    setillustEvent() {
+      [...this.$refs['illustsMasonry'].$el.querySelectorAll('img.illust')].map( el=>{
+
+        if(el.complete) {
+          window.dispatchEvent( new Event('resize') );
+        } else {
+          el.onload = () => {
+            window.dispatchEvent( new Event('resize') );
+          }
+        }
+      
+      });
     },
     showPixivInit( isDirectOpen = false ) {
       this.showPixivIllustModal(this.$route.params.illustId, isDirectOpen );
@@ -77,6 +95,7 @@ export default {
         component: ShowPixivIllust,
         paramObj: {
           dialog: {
+            minWidth: '60vw',
             maxWidth: '90vw',
             props: {
               illustId,
@@ -84,7 +103,6 @@ export default {
             },
             events: {
               'userError': () => {
-                console.log('user error');
                 window.location.replace(`https://www.pixiv.net/artworks/${illustId}`);
               }
             }
@@ -114,7 +132,7 @@ export default {
   },
   mounted() {
     this.$emit('scrollToTop');
-  }
+  },
 }
 </script>
 
@@ -125,10 +143,22 @@ export default {
   margin: 1.5rem;
 }
 
+.account-info {
+  padding: 1rem;
+  color: var(--secndary-text-dark);
+  background-color: var(--secndary-light);
+  margin-bottom: 1.5rem;
+  border-radius: 0.4rem;
+}
+
 .masonryBlock {
   --col-count: 2;
   --col-gap: 0.6rem;
   --row-gap: 0;
+
+  border: 1px solid var(--gray-1);
+  padding: 0.5rem;
+  margin: 1.5rem auto;
   // --row-gap: 1rem;
   // @media (min-width: $size-xs) { --col-count: 2; }
   @media (min-width: $size-sm) { --col-count: 3; }
@@ -141,6 +171,7 @@ export default {
 }
 
 .illustCard {
+  cursor: pointer;
   // border: 1px solid #000;
   margin-bottom: 1.2rem;
   .illust {
@@ -155,6 +186,12 @@ export default {
     font-size: 0.9rem;
     font-weight: bold;
     line-height: 125%;
+  }
+
+  &:hover {
+    .illust {
+      border: 4px solid var(--gray-2);
+    }
   }
 }
 </style>
