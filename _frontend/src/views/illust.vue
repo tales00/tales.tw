@@ -8,7 +8,7 @@
           img.illust(
             :alt="illust.alt"
             :data-illust-id="`pixiv:${illust.id}`"
-            :data-src="`//images.weserv.nl/?we&il&w=360&url=pixiv.cat/${illust.id}${illust.pageCount>1?'-1':''}.jpg`"
+            :data-src="`//images.weserv.nl/?we&il&w=320&url=pixiv.cat/${illust.id}${illust.pageCount>1?'-1':''}.jpg`"
             loading="lazy"
             referrerpolicy="no-referrer"
           )
@@ -200,13 +200,10 @@ export default {
 
 .illustCard {
   cursor: pointer;
-  // border: 1px solid #000;
-  min-height: 150px;
   margin-bottom: 1.2rem;
   .illust {
+    width: 100%;
     max-width: 100%;
-    height: auto;
-    max-height: auto;
     display: block;
     border: 4px solid var(--gray-4);
   }
