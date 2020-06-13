@@ -7,7 +7,8 @@
         .illustCard(@click="pushIllustId(illust.id)")
           img.illust(
             :alt="illust.alt"
-            :src="`//images.weserv.nl/?we$il&w=360&url=pixiv.cat/${illust.id}${illust.pageCount>1?'-1':''}.jpg`"
+            :data-illust-id="`pixiv:${illust.id}`"
+            :data-src="`//images.weserv.nl/?we&il&w=360&url=pixiv.cat/${illust.id}${illust.pageCount>1?'-1':''}.jpg`"
             loading="lazy"
             referrerpolicy="no-referrer"
           )
@@ -29,6 +30,7 @@ const {
 export default {
   name: 'illust',
   components: { masonryBlock, masonryItem },
+  // data() { return { }},
   computed: {
     ...mapPixivState(['illusts', 'mangas', 'profile', 'update',]),
     ...mapPixivGetters({ isPixivLoaded: 'isLoaded' }),
@@ -52,41 +54,67 @@ export default {
     }
   },
   methods: {
-    ...mapPixivActions({
-      fetchPixivUser: 'fetchUser'
-    }),
+    ...mapPixivActions({ fetchPixivUser: 'fetchUser' }),
+
+    // view 'illust' 的 init
+    // 載入 pixiv 的資料後或者立刻設定 lazy load
     illustInit() {
       if( !this.isPixivLoaded ) {
         this.fetchPixivUser(743865).then( () => {
-          setTimeout( () => {
-            this.setillustEvent();
-          }, 1000);
+          setTimeout( this.setillustEvent, 1000);
         });
       } else {
-        setTimeout( () => {
-          window.dispatchEvent( new Event('resize') );
-        }, 250);
+        setTimeout( this.setillustEvent, 100);
       }
     },
-    setillustEvent() {
-      [...this.$refs['illustsMasonry'].$el.querySelectorAll('img.illust')].map( el=>{
 
-        if(el.complete) {
-          window.dispatchEvent( new Event('resize') );
-        } else {
-          el.onload = () => {
+    // 給載入的 img 設定 lazy load （或者立刻載入）
+    setillustEvent() {
+      // 將 data-src 改回 src
+      const dataSrcToSrc = img => {
+        img.setAttribute('src', img.dataset.src) // 把值塞回 src
+        img.removeAttribute('data-src');
+        img.onload = () => {
+          setTimeout( ()=>{
             window.dispatchEvent( new Event('resize') );
+          }, 100);
+        };
+      };
+
+      // 設定目標進入畫面時要做什麼
+      const onEnterView = ( entries, observer ) => {
+        for (let entry of entries) {
+          if (entry.isIntersecting) {
+            // 監視目標進入畫面
+            const img = entry.target;
+            if( img.dataset.src ) {
+              dataSrcToSrc(img);
+            }
+            observer.unobserve(img) // 取消監視
           }
         }
-      
+      };
+
+      const watcher = new IntersectionObserver(onEnterView);
+
+      // 逐個將瀑布流中的 img 設定 lazy load
+      [...this.$refs['illustsMasonry'].$el.querySelectorAll('img.illust')].map( img=>{
+        watcher.observe(img);
       });
     },
+
+    // view 'showPixivIllust' 的 init
+    // 開啟 modal ， isDirectOpen 表示是直接進入這個 route 的狀態
     showPixivInit( isDirectOpen = false ) {
       this.showPixivIllustModal(this.$route.params.illustId, isDirectOpen );
     },
+
+    // 切入 showPixivIllust 的 route
     pushIllustId( illustId ) {
       this.$router.push({ name: 'showPixivIllust', params: { illustId }});
     },
+
+    // 開啟 modal
     showPixivIllustModal(illustId, isDirectOpen = false) {
       const popstateEv = () => {
         this.$dialog.hide();
@@ -173,9 +201,12 @@ export default {
 .illustCard {
   cursor: pointer;
   // border: 1px solid #000;
+  min-height: 150px;
   margin-bottom: 1.2rem;
   .illust {
-    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: auto;
     display: block;
     border: 4px solid var(--gray-4);
   }

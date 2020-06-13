@@ -11,7 +11,7 @@ function debounce(fn) {
     frame = requestAnimationFrame( ()=>{ fn(...params); } )
   }
 }
-const createMasonryBlock = ({$el, $spanBasis = 16}) => {
+const createMasonryBlock = ({$el, $spanBasis = 24}) => {
   console.log('createMasonryBlock');
 
   return ()=>{    
@@ -58,16 +58,8 @@ export default {
     const calcMasonryBlock = debounce(createMasonryBlock({$el: this.$el}));
     // 各種情況觸發重新計算
     window.addEventListener('resize', calcMasonryBlock, {passive: true} );
-    this.$on('hook:updated', () => {
-      console.log('masonry updated');
-      
-      if( this.$slots.default ) { 
-        console.log('slot fills');
-        calcMasonryBlock();
-      }
-    } );
 
-    // 刪掉事件
+    // 結束時刪掉事件
     this.$once('hook:beforeDestroy', () => { window.removeEventListener('resize', calcMasonryBlock ); });
   },
 }
