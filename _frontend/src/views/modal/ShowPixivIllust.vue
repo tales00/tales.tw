@@ -11,8 +11,11 @@
       h2.illustTitle
         a(:href="`//www.pixiv.net/artworks/${illustId}`" target="_blank")
           | {{ illust.title }}
+      //- .description {{ illust.description }}
       .author
-        a.authorName(:href="user.URL" target="_blank") by {{ user.name }}
+        a(:href="user.URL" target="_blank")
+          img.avatar(:src="user.imageBig.replace('https://i.pximg.net', '//i.pixiv.cat')")
+          .authorName by {{ user.name }}
       .tags
         a.tag(
           v-for=" (tag, idx) in illust.tags"
@@ -100,10 +103,12 @@ picture {
 }
 .author {
   margin: 0.5rem auto 1rem;
-  text-align: right;
-}
-.authorName {
-  font-size: 0.8rem;
+  display: flex;
+  flex-direction: row-reverse;
+
+  a { max-width: 20%; }
+  .avatar { }
+  .authorName { text-align: right; }
 }
 .tags {
   display: flex;
