@@ -13,7 +13,7 @@ const getPixivUserData = userID => fetch(
 }) );
 
 const getPixivIllustData = illustID => fetch(
-	`${api_base}/fetch/dev/page/https://www.pixiv.net/artworks/${illustID}`,
+	`${api_base}/fetch/v1/page/https://www.pixiv.net/artworks/${illustID}`,
 	{ method: 'post' }
 ).then( res => res.json() )
 .then( ({meta}) => {
