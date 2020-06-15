@@ -26,8 +26,7 @@ export default {
 .pageRoot {
   height: inherit;
 }
-.scaffold, 
-.content
+.scaffold,
 {
   height: inherit;
 }
@@ -48,6 +47,10 @@ export default {
 
 header {
   grid-area: header;
+  position: sticky;
+  top: 0;
+  background-color: var(--primary-dark);
+  border-bottom: 0.1rem solid var(--gray-3);
 }
 footer {
   grid-area: footer;
