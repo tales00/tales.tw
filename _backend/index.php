@@ -15,6 +15,11 @@ $fw->config('_backend/config.ini');
 $fw->set('BASE_URL', "${fw['SCHEME']}://${fw['HOST']}${fw['BASE']}");
 
 // routes
-$fw->route('GET /', 'HomeControl->home', 3600);
+$fw->route([
+  'GET /',
+  'GET /blog',
+  'GET /illust',
+  'GET /illust/pixiv/*',
+], 'HomeControl->home', 3600);
 
 $fw->run();

@@ -5,7 +5,7 @@ import router from './router'
 import store from './store'
 
 // css
-import 'sanitize.css';
+// import 'sanitize.css';
 import './assets/css/tailwind.css'
 import '@/scss/base.scss';
 

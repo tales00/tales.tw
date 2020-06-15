@@ -1,52 +1,52 @@
 @mixin defineColorHSL($name, $hue, $saturation, $lightness, $lightnessMultiplier: 1.27, $saturationMultiplier: 2){
-  $name: --#{$name};
-  #{$name}-color-h: #{$hue};
-  #{$name}-color-s: #{$saturation};
-  #{$name}-color-l: #{$lightness};
+  $name: --#{""+$name};
+  #{""+$name}-color-h: #{$hue};
+  #{""+$name}-color-s: #{$saturation};
+  #{""+$name}-color-l: #{$lightness};
   
-  #{$name}-calc-light: #{$lightnessMultiplier};
-  #{$name}-calc-dark: #{$saturationMultiplier};
+  #{""+$name}-calc-light: #{$lightnessMultiplier};
+  #{""+$name}-calc-dark: #{$saturationMultiplier};
   
-  #{$name}-light-h: var(#{$name}-color-h);
-  #{$name}-light-s: var(#{$name}-color-s);
-  #{$name}-light-l: calc( var(#{$name}-color-l) * var(#{$name}-calc-light) );
+  #{""+$name}-light-h: var(#{""+$name}-color-h);
+  #{""+$name}-light-s: var(#{""+$name}-color-s);
+  #{""+$name}-light-l: calc( var(#{""+$name}-color-l) * var(#{""+$name}-calc-light) );
 
-  #{$name}-dark-h: var(#{$name}-color-h);
-  #{$name}-dark-s: var(#{$name}-color-s);
-  #{$name}-dark-l: calc( var(#{$name}-color-l) / var(#{$name}-calc-dark) );
+  #{""+$name}-dark-h: var(#{""+$name}-color-h);
+  #{""+$name}-dark-s: var(#{""+$name}-color-s);
+  #{""+$name}-dark-l: calc( var(#{""+$name}-color-l) / var(#{""+$name}-calc-dark) );
 
-  #{$name}-color: hsl( var(#{$name}-color-h), var(#{$name}-color-s), var(#{$name}-color-l) );
-  #{$name}-light: hsl( var(#{$name}-light-h), var(#{$name}-light-s), var(#{$name}-light-l) );
-  #{$name}-dark: hsl( var(#{$name}-dark-h), var(#{$name}-dark-s), var(#{$name}-dark-l) );
+  #{""+$name}-color: hsl( var(#{""+$name}-color-h), var(#{""+$name}-color-s), var(#{""+$name}-color-l) );
+  #{""+$name}-light: hsl( var(#{""+$name}-light-h), var(#{""+$name}-light-s), var(#{""+$name}-light-l) );
+  #{""+$name}-dark: hsl( var(#{""+$name}-dark-h), var(#{""+$name}-dark-s), var(#{""+$name}-dark-l) );
 
-  #{$name}-text-light: hsl(
-    calc( var(#{$name}-color-h) + 180), 
-    var(#{$name}-color-s), 
+  #{""+$name}-text-light: hsl(
+    calc( var(#{""+$name}-color-h) + 180), 
+    var(#{""+$name}-color-s), 
     95%
   );
-  #{$name}-text-gray: hsl(
-    var(#{$name}-color-h), 
+  #{""+$name}-text-gray: hsl(
+    var(#{""+$name}-color-h), 
     0%, 
-    calc(var(#{$name}-color-l) * 1.15)
+    calc(var(#{""+$name}-color-l) * 1.15)
   );
-  #{$name}-text-dark: hsl(
-    calc( var(#{$name}-color-h) + 180), 
-    var(#{$name}-color-s), 
+  #{""+$name}-text-dark: hsl(
+    calc( var(#{""+$name}-color-h) + 180), 
+    var(#{""+$name}-color-s), 
     10%
   );
 
 }
 
 @mixin definColorlightnessLevel($name: gray, $h: 210, $s: 16%, $lightest: 96, $darkest: 11, $count: 6) {
-  // --#{$name}-lightest: #{$lightest};
-  // --#{$name}-darkest: #{$darkest};
-  // --#{$name}-step: calc( ( var(--#{$name}-lightest) - var(--#{$name}-darkest) ) / $count );
+  // --#{""+$name}-lightest: #{$lightest};
+  // --#{""+$name}-darkest: #{$darkest};
+  // --#{""+$name}-step: calc( ( var(--#{""+$name}-lightest) - var(--#{""+$name}-darkest) ) / $count );
   // @for $idx from 0 through $count - 1 { 
-  //   --#{$name}-#{$idx}: hsl(#{$h}, #{$s}, calc( ( var(--#{$name}-lightest) - ( var(--#{$name}-step) * #{$idx} ) ) * 1% ) );
+  //   --#{""+$name}-#{$idx}: hsl(#{$h}, #{$s}, calc( ( var(--#{""+$name}-lightest) - ( var(--#{""+$name}-step) * #{$idx} ) ) * 1% ) );
   // }
   $step: ( $lightest - $darkest ) / $count ;
   @for $idx from 0 through $count - 1 { 
-    --#{$name}-#{$idx}: hsl(
+    --#{""+$name}-#{$idx}: hsl(
       #{$h}, 
       #{$s}, 
       calc( ( #{$lightest} - ( #{$step} * #{$idx} ) ) * 1% )
