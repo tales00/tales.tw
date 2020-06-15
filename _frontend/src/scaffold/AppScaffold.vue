@@ -15,19 +15,15 @@
 export default {
   name: 'scaffold',
   computed: {},
-  watch: { },
+  watch: {},
   methods: { },
   created() {},
-  mounted() {}
+  mounted() {},
 }
 </script>
 
 <style lang="scss" scoped>
-.pageRoot {
-  height: inherit;
-}
-.scaffold,
-{
+.pageRoot, .scaffold {
   height: inherit;
 }
 
@@ -36,6 +32,7 @@ export default {
   max-width: var(--app-max-width);
 }
 .content {
+  min-height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-template-areas: 
@@ -49,8 +46,6 @@ header {
   grid-area: header;
   position: sticky;
   top: 0;
-  background-color: var(--primary-dark);
-  border-bottom: 0.1rem solid var(--gray-3);
 }
 footer {
   grid-area: footer;

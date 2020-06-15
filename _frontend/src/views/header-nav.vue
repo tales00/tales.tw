@@ -2,7 +2,7 @@
   nav.navi
     h2.sectionName {{ $route.meta.sectionName }}
     router-link.routeLink(:to="{name:'profile'}") about
-    router-link.routeLink(:to="{name:'blog'}") blog
+    router-link.routeLink(:to="{name:'murmur'}") murmur
     router-link.routeLink(:to="{name:'illust'}") illust
     .modal(@click="$emit('showContact')")
       img(src="@/assets/img/envelope.svg")
@@ -25,6 +25,10 @@ export default {
   grid-gap: 1rem;
 
   align-items: center;
+
+  background-color: var(--primary-dark);
+  border-bottom: 0.1rem solid var(--primary-color);
+  box-shadow: 0 5px 5px rgba(0,0,0,0.3);
 }
 
 .modal {

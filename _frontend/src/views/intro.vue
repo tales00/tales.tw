@@ -14,7 +14,7 @@
     nav
       router-link.entry(:to="{name:'profile'}")
         img(src="@/assets/img/user-circle.svg")
-      router-link.entry(:to="{name:'blog'}")
+      router-link.entry(:to="{name:'murmur'}")
         img(src="@/assets/img/comment-alt-lines.svg")
       router-link.entry(:to="{name:'illust'}")
         img(src="@/assets/img/images.svg")
@@ -33,9 +33,10 @@ export default {
 <style lang="scss" scoped>
 @import '~@/scss/_modules/_variables';
 .intro {
-  --intro-height: calc(100vh - 3rem);
+  --intro-height: calc(100vh - 6rem);
   --intro-width: calc(100vw - 3rem);
   margin: 1.5rem;
+  margin-top: 1rem;
   height: var(--intro-height);
   display: grid;
 
@@ -75,8 +76,8 @@ export default {
     border-radius: 50%;
     box-shadow: 0 0.5em 1em rgba(0,0,0,0.5);
     
-    max-height: 80%;
-    max-width: 60%;
+    height: 80%;
+    max-height: 5cm;
   }
 }
 
@@ -138,7 +139,7 @@ nav {
     img{
       position: absolute;
       top: 50%;
-      width: calc(var(--intro-height) / 3);
+      // width: calc(var(--intro-height) / 3);
       height: calc(var(--intro-height) / 3);
 
       transform: translateX(-50%) translateY(-50%);;
@@ -162,7 +163,7 @@ nav {
 }
 @media (min-height: $size-md) {
   .intro {
-    --intro-height: calc(var(--size-md) - 3rem);
+    --intro-height: calc(var(--size-md) - 8rem);
   }
 }
 @media (min-width: $size-sm) {
@@ -173,7 +174,7 @@ nav {
 }
 @media (min-width: $size-md) {
   .intro {
-    --intro-width: calc(var(--size-md) - 3rem);
+    --intro-width: calc(var(--size-md) - 8rem);
     grid-template-columns: 0.8fr 1rem auto;
   }
   nav {

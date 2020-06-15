@@ -12,6 +12,9 @@ export default {
     isLoaded( state ) {
       return !!state.update;
     },
+    allWorks( {illusts, mangas} ) {
+      return [ ...illusts, ...mangas].sort( (a,b) => b.id-a.id )
+    }
   },
   mutations: {
     loadIllusts( state, illusts) {

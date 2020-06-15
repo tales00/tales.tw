@@ -1,9 +1,12 @@
 <template lang="pug">
   .sect-illust
     .account-info
-      | {{ profile.description }}
+      img.pixivLogo(src="@/assets/img/logo-pixiv.svg")
+      p.userName {{ profile.name }} ：
+      h2 “ {{ profile.description }} ”
+      a(:href="profile.url" target="_blank") …view all my works on pixiv
     masonry-block( v-if="isPixivLoaded" ref="illustsMasonry")
-      masonry-item( v-for=" (illust, idx) in illusts" )
+      masonry-item( v-for=" (illust, idx) in allWorks" )
         .illustCard(@click="pushIllustId(illust.id)")
           img.illust(
             :alt="illust.alt"
@@ -14,6 +17,10 @@
           )
           time.illustCreateDate {{ illust.createDate.match(/\d{4}-\d{2}-\d{2}/)[0] }}
           h3.illustTitle {{ illust.title }}
+      masonry-item
+        a.illustCard(:href="profile.url" target="_blank")
+          img.pixivLogo(src="@/assets/img/logo-pixiv.svg")
+          h3 view all my works on pixiv
 </template>
 
 <script>
@@ -33,7 +40,7 @@ export default {
   // data() { return { }},
   computed: {
     ...mapPixivState(['illusts', 'mangas', 'profile', 'update',]),
-    ...mapPixivGetters({ isPixivLoaded: 'isLoaded' }),
+    ...mapPixivGetters({ isPixivLoaded: 'isLoaded', allWorks: 'allWorks' }),
   },
   watch: {
     '$route.name': {
@@ -177,6 +184,23 @@ export default {
   background-color: var(--secndary-light);
   margin-bottom: 1.5rem;
   border-radius: 0.4rem;
+
+  display: grid;
+  grid-template-columns: 5rem auto;
+  grid-template-rows: auto auto auto;
+  grid-gap: 0.5rem 1.5rem;
+  
+  align-items: center;
+
+  .pixivLogo {
+    grid-row: 1 / -1;
+    align-self: flex-start;
+  }
+
+  a {
+    font-size: 0.9rem;
+    justify-self: flex-end;
+  }
 }
 
 .masonryBlock {

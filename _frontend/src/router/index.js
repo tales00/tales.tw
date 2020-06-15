@@ -27,13 +27,13 @@ export default new Router({
       component: () => import('@/views/profile.vue')
     },
     {
-      path: '/blog',
-      name: 'blog',
+      path: '/murmur',
+      name: 'murmur',
       meta: {
         scrollToViewTop: true,
-        sectionName: 'blog',
+        sectionName: 'murmur',
       },
-      component: () => import('@/views/blog.vue')
+      component: () => import('@/views/murmur.vue')
     },
     {
       path: '/illust',

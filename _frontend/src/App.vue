@@ -35,11 +35,11 @@ export default {
   computed: {},
   methods: {
     scrollToIntro() {
-      console.log('scrollToIntro');      
+      // console.log('scrollToIntro');      
       window.scrollTo({behavior: 'smooth'});
     },
     scrollToTop() {
-      console.log('scrollToTop');
+      // console.log('scrollToTop');
       this.$refs['header'].$el.scrollIntoView({behavior: 'smooth'});
     },
     showContact() {

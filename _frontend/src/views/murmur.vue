@@ -1,7 +1,10 @@
 <template lang="pug">
   .sect-blog
     .plurkProfile
-      | {{ plurkProfile.name }}
+      img.plurkavatar(:src="plurkProfile.avatar" referrerpolicy="no-referrer")
+      h2 “ 就只是平日的碎碎念… 也沒有念很多啦 ”
+      a(href="//www.plurk.com/taleslogs" target="_blank") …view all my murmur on plurk
+
     .plurkPosts
       article.plurkPost( v-for=" (post, idx) in plurkPost")
         .avatar
@@ -13,7 +16,7 @@
           | {{ publishedTimeAgo(post.published) }}
         .content( v-html="processPlurkContent(post)" )
         a.originLink( :href="'https://www.plurk.com' + post.url")
-          | (read more...)
+          | ( read comments... )
 </template>
 
 <script>
@@ -74,6 +77,31 @@ export default {
   margin: 1.5rem;
 }
 
+.plurkProfile {
+  padding: 1rem;
+  color: var(--secndary-text-dark);
+  background-color: var(--secndary-light);
+  margin-bottom: 1.5rem;
+  border-radius: 0.4rem;
+
+  display: grid;
+  grid-template-columns: 5rem auto;
+  grid-template-rows: auto auto;
+  grid-gap: 0.5rem 1.5rem;
+  
+  align-items: center;
+
+  .plurkavatar {
+    grid-row: 1 / -1;
+    align-self: flex-start;
+  }
+
+  a {
+    font-size: 0.9rem;
+    justify-self: flex-end;
+  }
+}
+
 .plurkPosts {
   display: grid;
   grid-gap: 1rem;
@@ -85,7 +113,7 @@ export default {
 
 .plurkPost {
   display: grid;
-  grid-template-columns: min(5rem, 12vw) 1fr;
+  grid-template-columns: min(6rem, 8vw) 1fr;
   grid-template-rows: auto auto 1fr;
   grid-template-areas:
     'avatar author'
@@ -111,6 +139,10 @@ export default {
   }
   .author, .content, .originLink { 
     background-color: var(--secndary-light);
+  }
+  .timestamp {
+    font-size: 0.7rem;
+    text-align: right;
   }
   .author {
     color: var(--gray-3);
@@ -147,14 +179,17 @@ export default {
       }
     
       .meta {
-        opacity: 0.5;
-        margin: 1rem auto;
-        display: grid;
-        grid-template-columns: 2fr 6fr;
-        grid-gap: 1rem;
+        // opacity: 0.5;
+        margin: 0.5rem;
+        display: flex;
+        flex-wrap: wrap;
         align-items: center;
         
-        img { width: 100%; }
+        img { 
+          margin: 0.5rem;
+          width: 100%;
+          max-width: 5rem;
+        }
       }
       
     }
@@ -162,9 +197,10 @@ export default {
   }
 
   .originLink {
-    color: var(--gray-2);
+    color: var(--gray-3);
     text-align: right;
-    padding: 1rem;
+    padding: 0.5rem;
+    margin-top: 0.15rem;
   }
 } 
 </style>
