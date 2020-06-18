@@ -14,6 +14,8 @@
     router-view(
       @scrollToIntro="scrollToIntro"
       @scrollToTop="scrollToTop"
+      @showQRcode="showQRcode"
+      @showContact="showContact"
     )
 </template>
 

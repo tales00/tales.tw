@@ -1,13 +1,13 @@
 <template lang="pug">
   nav.navi
     h2.sectionName {{ $route.meta.sectionName }}
-    router-link.routeLink(:to="{name:'profile'}") about
+    router-link.routeLink(:to="{name:'main'}") profile
     router-link.routeLink(:to="{name:'murmur'}") murmur
     router-link.routeLink(:to="{name:'illust'}") illust
-    .modal(@click="$emit('showContact')")
-      img(src="@/assets/img/envelope.svg")
-    .modal(@click="$emit('showQRcode')")
-      img(src="@/assets/img/qrcode.svg")
+    //- .modal(@click="$emit('showContact')")
+    //-   img(src="@/assets/img/envelope.svg")
+    //- .modal(@click="$emit('showQRcode')")
+    //-   img(src="@/assets/img/qrcode.svg")
 </template>
 
 <script>

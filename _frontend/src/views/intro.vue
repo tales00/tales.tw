@@ -12,7 +12,7 @@
       img(src="@/assets/img/avatar_tales_color.jpg")
     // -
     nav
-      router-link.entry(:to="{name:'profile'}")
+      router-link.entry(:to="{name:'main'}")
         img(src="@/assets/img/user-circle.svg")
       router-link.entry(:to="{name:'murmur'}")
         img(src="@/assets/img/comment-alt-lines.svg")

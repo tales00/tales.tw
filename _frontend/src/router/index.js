@@ -34,6 +34,7 @@ export default new Router({
         scrollToViewTop: true,
         sectionName: 'profile',
       },
+      component: () => import('@/views/profile.vue')
     },
     {
       path: '/murmur',
