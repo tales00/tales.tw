@@ -4,7 +4,7 @@
 // fallback: 找不到的話要返回什麼
 // call: 如果找到的是函數的話要不要直接執行
 // props: 如果要執行函數的話要給的參數，必須是 Array
-const pick = (input, chaingString, {fallback, call, props=[]}={}) => {
+export const pick = (input, chaingString, {fallback, call, props=[]}={}) => {
   // input 若不是物件 或 chaingString 不是字串 ，就 return input
   if (
     (typeof input !== 'object')
