@@ -33,29 +33,85 @@ export default {
   },
   data() { return { }},
   computed: {},
+  watch: {
+    '$route.name': {
+      immediate: false,
+      handler( routeName )  {
+        switch ( routeName ) {
+          case 'qrcode':
+            this.showQRcode();
+            break;
+
+          case 'contact':
+            this.showContact();
+            break;
+        }
+      }
+    }
+  },
   methods: {
     scrollToIntro() {
-      // console.log('scrollToIntro');      
       window.scrollTo({behavior: 'smooth'});
     },
     scrollToTop() {
-      // console.log('scrollToTop');
       this.$refs['header'].$el.scrollIntoView({behavior: 'smooth'});
     },
-    showContact() {
+    showContact( isDirectOpen = false ) {
       this.$dialog.show( {
         component: contact,
+        paramObj: {
+          hook: {
+            beforeOpen: () => {
+              if( isDirectOpen ) { 
+                window.addEventListener('popstate', this.$dialog.hide, {once: true});
+              }
+            },
+            beforeClose: () => {              
+              if( isDirectOpen ) { this.$router.push({ name: 'main' }); }
+            },
+            closed: () => {
+              if( isDirectOpen ) {
+                window.removeEventListener('popstate', this.$dialog.hide);
+              }
+            }
+          }
+        }
       } );
     },
-    showQRcode() {
+    showQRcode( isDirectOpen = false ) {
       this.$dialog.show( {
         component: qrcode,
+        paramObj: {
+          hook: {
+            beforeOpen: () => {
+              if( isDirectOpen ) { 
+                window.addEventListener('popstate', this.$dialog.hide, {once: true});
+              }
+            },
+            beforeClose: () => {              
+              if( isDirectOpen ) { this.$router.push({ name: 'main' }); }
+            },
+            closed: () => {
+              if( isDirectOpen ) {
+                window.removeEventListener('popstate', this.$dialog.hide);
+              }
+            }
+          }
+        }
       } );
     },
   },
   created() {
+    switch ( this.$route.name ) {
+      case 'qrcode':
+        this.showQRcode( true );
+        break;
+
+      case 'contact':
+        this.showContact( true );
+        break;
+    }
   },
-  
 }
 </script>
 <style lang="scss">

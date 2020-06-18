@@ -18,13 +18,22 @@ export default new Router({
       component: () => import('@/views/profile.vue')
     },
     {
+      path: '/contact',
+      name: 'contact',
+      meta: {}
+    },
+    {
+      path: '/qrcode',
+      name: 'qrcode',
+      meta: { },
+    },
+    {
       path: '/profile',
       name: 'profile',
       meta: {
         scrollToViewTop: true,
         sectionName: 'profile',
       },
-      component: () => import('@/views/profile.vue')
     },
     {
       path: '/murmur',
