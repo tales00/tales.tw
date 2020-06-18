@@ -17,7 +17,9 @@ $fw->set('BASE_URL', "${fw['SCHEME']}://${fw['HOST']}${fw['BASE']}");
 // routes
 $fw->route([
   'GET /',
-  'GET /blog',
+  'GET /qrcode',
+  'GET /contact',
+  'GET /murmur',
   'GET /illust',
   'GET /illust/pixiv/*',
 ], 'HomeControl->home', 3600);
