@@ -54,8 +54,4 @@ main {
   grid-area: main;
   // padding: 1.5rem;
 }
-
-.unsuportted:not(:only-child) {
-  display: none;
-}
 </style>
